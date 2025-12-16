@@ -1,0 +1,45 @@
+{
+  "components": [
+    {
+      "text": "Valider sagsoprettelse",
+      "type": "text",
+      "layout": {
+        "row": "Row_1e117g0",
+        "columns": null
+      },
+      "id": "Field_1329fnn"
+    },
+    {
+      "label": "Er sagsopretelse OK?",
+      "values": [
+        {
+          "label": "Nej",
+          "value": "false"
+        },
+        {
+          "label": "Ja",
+          "value": "true"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_19bpd4k",
+        "columns": null
+      },
+      "id": "Field_1it6mhy",
+      "key": "validationresult",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "proces.validation.case.creation",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.36.1"
+  },
+  "schemaVersion": 18
+}

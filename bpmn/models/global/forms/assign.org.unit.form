@@ -1,0 +1,40 @@
+{
+  "components": [
+    {
+      "label": "Vælg afdeling",
+      "values": [
+        {
+          "label": "Afdeling A",
+          "value": "dept_a"
+        },
+        {
+          "label": "Afdeling B",
+          "value": "dept_b"
+        },
+        {
+          "label": "Afdeling C",
+          "value": "dept_c"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_0zwxgte",
+        "columns": null
+      },
+      "id": "Field_1651suq",
+      "key": "select.org.unit",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "assign.org.unit",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.36.1"
+  },
+  "schemaVersion": 18
+}

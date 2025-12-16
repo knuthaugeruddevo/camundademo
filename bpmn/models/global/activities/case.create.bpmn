@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0vpvx3x" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.36.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
+  <bpmn:process id="case.create" name="Opret sag" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0u8gszx</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:parallelGateway id="Gateway_0b8ihfo">
+      <bpmn:incoming>Flow_1v8iuvx</bpmn:incoming>
+      <bpmn:outgoing>Flow_066pm7k</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1i2uwle</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1d89lk0</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:inclusiveGateway id="Gateway_019ft7p">
+      <bpmn:incoming>Flow_0uxlnop</bpmn:incoming>
+      <bpmn:incoming>Flow_1prtycl</bpmn:incoming>
+      <bpmn:incoming>Flow_10ojxdd</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lp0u6y</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1v8iuvx" sourceRef="case.create.register.petition" targetRef="Gateway_0b8ihfo" />
+    <bpmn:sequenceFlow id="Flow_066pm7k" sourceRef="Gateway_0b8ihfo" targetRef="case.create.register.skyldner" />
+    <bpmn:sequenceFlow id="Flow_1i2uwle" sourceRef="Gateway_0b8ihfo" targetRef="case.create.register.lawyer" />
+    <bpmn:sequenceFlow id="Flow_1d89lk0" sourceRef="Gateway_0b8ihfo" targetRef="case.create.register.rekvirent" />
+    <bpmn:sequenceFlow id="Flow_0uxlnop" sourceRef="case.create.register.skyldner" targetRef="Gateway_019ft7p" />
+    <bpmn:sequenceFlow id="Flow_1prtycl" sourceRef="case.create.register.rekvirent" targetRef="Gateway_019ft7p" />
+    <bpmn:sequenceFlow id="Flow_10ojxdd" sourceRef="case.create.register.lawyer" targetRef="Gateway_019ft7p" />
+    <bpmn:sequenceFlow id="Flow_0lp0u6y" sourceRef="Gateway_019ft7p" targetRef="Event_10r1gr1" />
+    <bpmn:sequenceFlow id="Flow_0u8gszx" sourceRef="StartEvent_1" targetRef="case.create.register.petition" />
+    <bpmn:endEvent id="Event_10r1gr1">
+      <bpmn:incoming>Flow_0lp0u6y</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="case.create.register.petition" name="Registrer begæring">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="register.petition" />
+        <zeebe:ioMapping>
+          <zeebe:output source="=1" target="caseno" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0u8gszx</bpmn:incoming>
+      <bpmn:outgoing>Flow_1v8iuvx</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="case.create.register.lawyer" name="Registrer advokat">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="register.lawyer" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1i2uwle</bpmn:incoming>
+      <bpmn:outgoing>Flow_10ojxdd</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="case.create.register.rekvirent" name="Registrer rekvirent">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="register.rekvirent" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1d89lk0</bpmn:incoming>
+      <bpmn:outgoing>Flow_1prtycl</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="case.create.register.skyldner" name="Registrer Skyldner">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="register.skyldner" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_066pm7k</bpmn:incoming>
+      <bpmn:outgoing>Flow_0uxlnop</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmn:signal id="Signal_1sjqsga" name="case.create.complete" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="case.create">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="202" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1oyd8r6" bpmnElement="Gateway_0b8ihfo">
+        <dc:Bounds x="375" y="195" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_11rvuqb" bpmnElement="Gateway_019ft7p">
+        <dc:Bounds x="605" y="195" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1n78ciz_di" bpmnElement="Event_10r1gr1">
+        <dc:Bounds x="692" y="202" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0e877m2_di" bpmnElement="case.create.register.petition">
+        <dc:Bounds x="230" y="180" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1p20yqp_di" bpmnElement="case.create.register.lawyer">
+        <dc:Bounds x="450" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0yhlti2_di" bpmnElement="case.create.register.rekvirent">
+        <dc:Bounds x="450" y="180" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0vnywvq_di" bpmnElement="case.create.register.skyldner">
+        <dc:Bounds x="450" y="300" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_06tehq2" bpmnElement="Flow_1v8iuvx">
+        <di:waypoint x="330" y="220" />
+        <di:waypoint x="375" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_1gv8qcc" bpmnElement="Flow_066pm7k">
+        <di:waypoint x="400" y="245" />
+        <di:waypoint x="400" y="340" />
+        <di:waypoint x="450" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_18kpclk" bpmnElement="Flow_1i2uwle">
+        <di:waypoint x="400" y="195" />
+        <di:waypoint x="400" y="120" />
+        <di:waypoint x="450" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_0si06g1" bpmnElement="Flow_1d89lk0">
+        <di:waypoint x="425" y="220" />
+        <di:waypoint x="450" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_12vtlgi" bpmnElement="Flow_0uxlnop">
+        <di:waypoint x="550" y="340" />
+        <di:waypoint x="630" y="340" />
+        <di:waypoint x="630" y="245" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_1wikei3" bpmnElement="Flow_1prtycl">
+        <di:waypoint x="550" y="220" />
+        <di:waypoint x="605" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_0rq78mx" bpmnElement="Flow_10ojxdd">
+        <di:waypoint x="550" y="120" />
+        <di:waypoint x="630" y="120" />
+        <di:waypoint x="630" y="195" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_1ua8m5u" bpmnElement="Flow_0lp0u6y">
+        <di:waypoint x="655" y="220" />
+        <di:waypoint x="692" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0u8gszx_di" bpmnElement="Flow_0u8gszx">
+        <di:waypoint x="188" y="220" />
+        <di:waypoint x="230" y="220" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

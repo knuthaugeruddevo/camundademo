@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_01i3us3" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.36.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
+  <bpmn:process id="case.create.assign.orgunit" name="Tildel afdeling" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0xbuv06</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Activity_0vn3u2g" name="Tildel afdeling">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:assignmentDefinition assignee="demo" />
+        <zeebe:formDefinition formId="assign.org.unit" />
+        <zeebe:ioMapping>
+          <zeebe:output source="=select.org.unit" target="caseOrgunit" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0xbuv06</bpmn:incoming>
+      <bpmn:outgoing>Flow_0uw6nc8</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0xbuv06" sourceRef="StartEvent_1" targetRef="Activity_0vn3u2g" />
+    <bpmn:sequenceFlow id="Flow_0uw6nc8" sourceRef="Activity_0vn3u2g" targetRef="Activity_1qnz17x" />
+    <bpmn:serviceTask id="Activity_1qnz17x" name="Gem afdeling">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="case.create.persist.orgunit" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=caseOrgunit" target="orgunit" />
+          <zeebe:input source="=caseno" target="caseno" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0uw6nc8</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dbdshw</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_16vjlsk">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_0dbdshw</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0dbdshw" sourceRef="Activity_1qnz17x" targetRef="Event_16vjlsk" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="case.create.assign.orgunit">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="182" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06wag6z_di" bpmnElement="Activity_0vn3u2g">
+        <dc:Bounds x="290" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_13ew2jt_di" bpmnElement="Activity_1qnz17x">
+        <dc:Bounds x="470" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_16vjlsk_di" bpmnElement="Event_16vjlsk">
+        <dc:Bounds x="652" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0xbuv06_di" bpmnElement="Flow_0xbuv06">
+        <di:waypoint x="218" y="120" />
+        <di:waypoint x="290" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0uw6nc8_di" bpmnElement="Flow_0uw6nc8">
+        <di:waypoint x="390" y="120" />
+        <di:waypoint x="470" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dbdshw_di" bpmnElement="Flow_0dbdshw">
+        <di:waypoint x="570" y="120" />
+        <di:waypoint x="652" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
